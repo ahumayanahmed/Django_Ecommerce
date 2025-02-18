@@ -1,0 +1,230 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+/* Fix the search bar at the top */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: 1000; /* Makes sure the header stays on top of other elements */
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional, for a shadow effect */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.search-bar button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #0056b3;
+}
+
+/* Add padding to the body to avoid content hiding under the fixed header */
+body {
+    padding-top: 80px; /* Adjust based on the height of your header */
+}
+
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    background: #c9c6c6;
+    color: rgb(152, 4, 144);
+    padding: 10px 20px;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.search-bar input {
+    padding: 5px;
+    width: 200px;
+    
+}
+
+/* Mega Menu */
+/* Basic Mega Menu Styles */
+.mega-menu {
+    list-style: none;
+    display: flex;
+    padding: 0;
+}
+
+.mega-menu li {
+    margin: 0 15px;
+    position: relative;
+}
+
+.mega-menu li a {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+}
+
+.categories:hover .dropdown {
+    display: block;
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    display: none;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    margin: 0;
+    width: 200px;
+}
+
+.dropdown li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(21, 24, 24);
+}
+
+.dropdown li a:hover {
+    background-color: #cbe312;
+    
+}
+
+
+
+
+/* Slider */
+.slider img {
+    width: 100%;
+    height: auto;
+}
+
+
+
+/* Products */
+/* Product Details Section */
+.product-details {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.product-gallery {
+    width: 50%;
+    margin-right: 20px;
+}
+
+.product-gallery .main-image img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.product-gallery .image-thumbnails {
+    display: flex;
+    margin-top: 10px;
+}
+
+.product-gallery .image-thumbnails img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.product-gallery .image-thumbnails img:hover {
+    opacity: 0.7;
+}
+
+/* Product Description Section */
+.product-description {
+    width: 50%;
+}
+
+.product-description .price {
+    font-size: 24px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-description .description {
+    margin: 20px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+.quantity {
+    margin-bottom: 20px;
+}
+
+.quantity input {
+    width: 60px;
+    padding: 5px;
+}
+
+.add-to-cart button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart button:hover {
+    background-color: #0056b3;
+}
+
+.product-list {
+    display: flex;
+}
+
+.product {
+    margin: 10px;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    
+}
+
+.cart-link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    transition: background 0.3s;
+}
+
+.cart-link:hover {
+    background-color: #ddd;
+}
+

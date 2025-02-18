@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>{{ prod.name }}</title>
+    <link rel="stylesheet" href="{% static 'productdetails.css' %}">
+</head>
+<body>
+
+<section class="product-details">
+    <h2>{{ prod.name }}</h2>
+    <div class="product-info">
+        <!-- Product Image and Gallery -->
+        <div class="product-gallery">
+            <div class="main-image">
+                <img src="{{ prod.image.url }}" alt="{{ prod.name }}" id="main-image">
+            </div>
+            <div class="image-thumbnails">
+                {% for image in product_images %}
+                    <img src="{{ image.image.url }}" alt="Product Image" class="thumbnail"
+                    onclick="changeImage('{{ image.image.url }}')">
+                {% empty %}
+                    <p>No images available for this product.</p>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Product Info -->
+        <div class="product-description">
+            <p class="price">{{ prod.price }} Taka</p>
+            {% if prod.old_price %}
+            <div class="old-price">
+                {{ prod.old_price }} Taka
+            </div>
+            {% endif %}
+            <p class="description">{{ prod.description }}</p>
+
+            <!-- Quantity and Add to Cart -->
+            <form method="post" action="{% url 'about:add_to_cart' item_id=prod.id %}">
+                {% csrf_token %}
+                <div class="quantity">
+                    <label for="quantity">Quantity: </label>
+                    <input type="number" name="quantity" id="quantity" value="1" min="1">
+                </div>
+                
+                <!-- Size Selection -->
+                {% if size_variations %}
+                <div class="size-selection">
+                    <label for="size">Select Size:</label>
+                    <select name="size" id="size">
+                        {% for size in size_variations %}
+                            <option value="{{ size.name }}">{{ size.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% else %}
+                <p>No sizes available.</p>
+                {% endif %}
+
+                <!-- Color Selection -->
+                {% if color_variations %}
+                <div class="color-selection">
+                    <label for="color">Select Color:</label>
+                    <select name="color" id="color">
+                        {% for color in color_variations %}
+                            <option value="{{ color.name }}">{{ color.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% else %}
+                <p>No colors available.</p>
+                {% endif %}
+
+                <!-- Add to Cart Button -->
+                <div class="add-to-cart">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </div>
+                <div class="category">Category: {{ prod.category }}</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>

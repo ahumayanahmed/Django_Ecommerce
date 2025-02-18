@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+{% load cartproduct %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+  </head>
+  <body>
+    <div class="cart-container">
+      {% if request.user.is_authenticated %}
+        🛒 Cart (<span id="cart-count">{{ request.user|cart_count }}</span>)
+      {% else %}
+        🛒 Cart (0)
+      {% endif %}
+
+      {% if request.user.is_authenticated %}
+        {% with cart_items=request.user|cart_view %}
+          {% if cart_items %}
+            <!-- Product List -->
+            <ul class="product-list">
+              {% for cart in cart_items %}
+                <li class="product-item">
+                  <div class="product-cart-details">
+                    <h4 class="product-title">
+                    <!--<a href="product/{{ cart.item.id }}"></a>-->  
+                    {{ cart.item.name }}
+                    </h4><br>
+                    <p class="product-size">Size: {{ cart.size }}</p>
+                    <p class="product-color">Color: {{ cart.color }}</p>
+                  </div>
+
+                  <span class="cart-product-info">
+                    <span class="cart-product-qty">{{ cart.quantity }}</span>
+                    x {{ cart.get_total }}
+                  </span>
+
+                  <figure class="product-image-container">
+                   <!--<a href="product/{{ cart.item.id }}" class="product-image"> -->
+                      <img src="{{ cart.item.image.url }}" alt="{{ cart.item.name }}">
+                    </a>
+                  </figure>
+
+                  <a href="{% url 'about:remove_from_cart' item_id=cart.item.id %}" class="btn-remove" title="Remove Product">
+                    <i class="icon-close"></i> Remove
+                  </a>
+                  
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>Your cart is empty.</p>
+          {% endif %}
+        {% endwith %}
+      {% endif %}
+
+      <!-- Cart Summary -->
+      <div class="dropdown-cart-total">
+        <span>Total:</span>
+        <span class="cart-total-price">{{ request.user|cart_total }}</span>
+      </div>
+
+      <!-- Cart Actions -->
+      <div class="dropdown-cart-action">
+        <a href="#" class="btn btn-primary">View Cart</a>
+        <a href="#" class="btn btn-outline-primary-2">
+          <span>Checkout</span>
+        </a>
+      </div>
+    </div>
+
+  </body>
+</html>

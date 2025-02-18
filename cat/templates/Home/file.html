@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load category %}
+{% load cartproduct %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    
+    <!-- Header Section -->
+    <header>
+        <div class="logo">AZ <span>WOR</span> LD</div>
+        <!-- Mega Menu -->
+    <nav>
+        <ul class="mega-menu">
+            <li><a href="{% url 'categoris:home' %}">Home</a></li>
+                <li><a href="{% url 'categoris:shop'%}">Shop</a></li>
+            <li class="categories">
+                <a href="#">Categories</a>
+                <!-- Dropdown Menu -->
+                <ul class="dropdown">
+                    {% for cat in request.user|get_categories %}
+                     {% if not cat.children.all%}
+                    <li><a href="{% url 'categoris:Eloctronic'%}">{{cat.name}}</a></li>
+                    {% else %}
+                    <li><a href="#">{{cat.name}}</a></li>
+                    <ul>
+                      {% for subcategory in cat.children.all%}  
+                        <li><a href="#">{{subcategory.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                   
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+            
+            <li><a href="">Contuct</a></li>
+            <li><a href="">Blogs</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+        <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button>Search</button>
+        </div>
+        <div class="user-actions">
+            <a href="{% url 'about:cart' %}" class="cart-link">
+               {% if request.user.is_authenticated %}
+                🛒 Cart (<span id="cart-count">{{request.user|cart_count}}</span>)
+                {% else %}
+                🛒 Cart (<span id="cart-count">{{request.user|cart_count}}</span>)
+                {% endif %}
+            </a>
+             
+            
+            <a href="#">Login</a> | <a href="#">Register</a>
+            
+        </div>
+        
+    </header>
+
+    
+
+    
+    <!-- Slider -->
+<div class="slider">
+    <img src="{% static 'img/banner/1.jpg'%}" alt="Slider Image 1">
+    <img src="{% static 'img/banner/2.jpg'%}" alt="Slider Image 2">
+</div>
+
+
+    <!-- Brands -->
+    <div class="brands">
+        <img src="img/brand/1.png" alt="Brand 1">
+        <img src="img/brand/1.webp" alt="Brand 2">
+    </div>
+
+    <!-- Trending Products -->
+    <section class="trending-products">
+        <h2>Trending Products</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="images/product1.jpg" alt="Product 1">
+                <p>Product Name</p>
+            </div>
+            <div class="product">
+                <img src="images/product2.jpg" alt="Product 2">
+                <p>Product Name</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="{% static 'img/shoes/1.jpg'%}" alt="Product 3">
+                <p>Product Name</p>
+            </div>
+            <div class="product">
+                <img src="{% static 'img/shoes/2.jpg'%}" alt="Product 4">
+                <p>Product Name</p>
+            </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="{% static 'img/shoes/3.jpg'%}" alt="Product 3">
+                <p>Product Name</p>
+            </div>
+        <div class="product-list">
+            <div class="product">
+                <img src="{% static 'img/shoes/3.jpg'%}" alt="Product 3">
+                <p>Product Name</p>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 eShop. All Rights Reserved.</p>
+    </footer>
+
+    <script src="{% static 'script.js'%}"></script>
+</body>
+</html>

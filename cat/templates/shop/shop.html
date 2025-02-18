@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+{% load category %}
+{% load cartproduct %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} Products</title>
+    <link rel="stylesheet" href="{% static 'prod.css' %}">
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="{% url 'categoris:shop'%}">Shop</a></div>
+       
+        <div class="search-bar">
+            <input type="text" placeholder="Search products...">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <section class="category-products">
+        <h2>Products in {{ category.name }}</h2>
+        <div class="product-list">
+            {% for product in pro %}
+            <div class="product" onclick="window.location.href='{% url 'product-detail' slug=product.slug %}'">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>Price: {{ product.price }} Taka</p>
+            </div>
+            {% empty %}
+            <p>No products available in this category.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 eShop. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
